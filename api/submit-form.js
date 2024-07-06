@@ -1,41 +1,23 @@
-const nodemailer = require('nodemailer');
-require('dotenv').config();
-const path = require('path');
+// Import necessary modules
+import { parse } from 'querystring';
 
-const transporter = nodemailer.createTransport({
-    service: "Gmail",
-    auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
-    },
-});
+// Define your serverless function handler
+export default async function handler(req, res) {
+  // Ensure the request method is POST
+  if (req.method === 'POST') {
+    let body = '';
+    
+    // Collect data from the request stream
+    req.on('data', (chunk) => {
+      body += chunk.toString();
+    });
 
-module.exports = async (req, res) => {
-    if (req.method === 'POST') {
-        const { name, email } = req.body;
-        const address = req.body['Home Address'];
-
-        // const mailOptions = {
-        //     from: process.env.EMAIL_USER,
-        //     to: process.env.EMAIL_USER,
-        //     subject: 'New Form Submission',
-        //     text: `Form submission received:\nName: ${name}\nEmail: ${email}\nAddress: ${address}`
-        // };
-        console.log(name, email, address);
-        // res.sendFile(path.join(__dirname, '../public/submitForm.html'));
-        // // Send email asynchronously
-        // transporter.sendMail(mailOptions)
-        //     .then(info => {
-        //         console.log('Email sent: ' + info.response);
-        //         res.status(200).sendFile(path.join(__dirname, '../public/submitForm.html'));
-        //     })
-        //     .catch(error => {
-        //         console.error('Error sending email:', error);
-        //         res.status(500).send('Error sending email');
-        //     });
-
-        // res.status(200).sendFile(path.join(__dirname, '../public/submitForm.html'));
-    } else {
-        res.status(405).send('Method Not Allowed');
-    }
-};
+    // Parse the collected data when the request ends
+    req.on('end', () => {
+      const parsedBody = parse(body);
+      return res.send(`Hello ${parsedBody.name}, you just parsed the request body!`);
+    });
+  } else {
+    return res.status(405).send('Method Not Allowed');
+  }
+}
