@@ -90,7 +90,7 @@ document.getElementById("myForm").onsubmit = async function(event) {
         body: formData
     });
     if (response.ok) {
-        window.location.href = '/submitForm.html'; // Redirect to success page
+        window.location.href = 'submitForm.html'; // Redirect to success page
     } else {
         alert('Failed to submit form');
     }
