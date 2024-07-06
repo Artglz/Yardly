@@ -1,5 +1,6 @@
 // api/submitForm.js
 const nodemailer = require('nodemailer');
+require('dotenv').config();
 
 
 const transporter = nodemailer.createTransport({
@@ -15,21 +16,22 @@ export default async function handler(req, res) {
     if (req.method === 'POST') {
         const { name, email } = req.body;
         const address = req.body['Home Address'];
+
         const mailOptions = {
             from: process.env.EMAIL_USER,
             to: process.env.EMAIL_USER, 
             subject: 'New Form Submission',
             text: `Form submission received:\nName: ${name}\nEmail: ${email}\nAddress: ${address}`
         };
-        try {
-            await transporter.sendEmail(mailOptions);
-            res.status(200).json({ message: 'Email sent successfully' });
-        } catch (error) {
-            console.error('Error sending email:', error);
-            res.status(500).json({ message: 'Failed to send email' });
-        }
+
+        transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+                return res.status(500).send(error.toString());
+            }
+            console.log('Email sent: ' + info.response);
+            res.status(200).send(thankYouHtml);
+        });
     } else {
-        res.setHeader('Allow', ['POST']);
-        res.status(405).end(`Method ${req.method} Not Allowed`);
+        res.status(405).send('Method Not Allowed');
     }
 }
