@@ -15,25 +15,25 @@ module.exports = async (req, res) => {
         const { name, email } = req.body;
         const address = req.body['Home Address'];
 
-        const mailOptions = {
-            from: process.env.EMAIL_USER,
-            to: process.env.EMAIL_USER,
-            subject: 'New Form Submission',
-            text: `Form submission received:\nName: ${name}\nEmail: ${email}\nAddress: ${address}`
-        };
+        // const mailOptions = {
+        //     from: process.env.EMAIL_USER,
+        //     to: process.env.EMAIL_USER,
+        //     subject: 'New Form Submission',
+        //     text: `Form submission received:\nName: ${name}\nEmail: ${email}\nAddress: ${address}`
+        // };
+        console.log(name, email, address);
+        // // Send email asynchronously
+        // transporter.sendMail(mailOptions)
+        //     .then(info => {
+        //         console.log('Email sent: ' + info.response);
+        //         res.status(200).sendFile(path.join(__dirname, '../public/submitForm.html'));
+        //     })
+        //     .catch(error => {
+        //         console.error('Error sending email:', error);
+        //         res.status(500).send('Error sending email');
+        //     });
 
-        // Send email asynchronously
-        transporter.sendMail(mailOptions)
-            .then(info => {
-                console.log('Email sent: ' + info.response);
-                res.status(200).sendFile(path.join(__dirname, '../public/submitForm.html'));
-            })
-            .catch(error => {
-                console.error('Error sending email:', error);
-                res.status(500).send('Error sending email');
-            });
-
-        res.status(200).sendFile(path.join(__dirname, '../public/submitForm.html'));
+        // res.status(200).sendFile(path.join(__dirname, '../public/submitForm.html'));
     } else {
         res.status(405).send('Method Not Allowed');
     }
