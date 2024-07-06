@@ -34,7 +34,7 @@ const thankYouHtml = `
     </style>
 </head>
 <body>
-    <img src="Yardly.jpg" alt="">
+    <img src="/public/Yardly.jpg" alt="">
     <h2>Thank you for submitting the Form!</h2>
 
 </body>
