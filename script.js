@@ -52,16 +52,16 @@ window.onload = displayData;
 
 
 
-// document.getElementById("myForm").onsubmit = async function(event) {
-//     event.preventDefault();
-//     const formData = new FormData(this);
-//     const response = await fetch('/api/submit-form', {
-//         method: 'POST',
-//         body: formData
-//     });
-//     if (response.ok) {
-//         window.location.href = 'submitForm.html'; // Redirect to success page
-//     } else {
-//         alert('Failed to submit form');
-//     }
-// };
+document.getElementById("myForm").onsubmit = async function(event) {
+    event.preventDefault();
+    const formData = new FormData(this);
+    const response = await fetch('/api/submit-form', {
+        method: 'POST',
+        body: formData
+    });
+    if (response.ok) {
+        window.location.href = 'submitForm.html'; // Redirect to success page
+    } else {
+        alert('Failed to submit form');
+    }
+};
