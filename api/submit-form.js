@@ -70,7 +70,7 @@ module.exports = (req, res) => {
                 return res.status(500).send(error.toString());
             }
             console.log('Email sent: ' + info.response);
-            res.status(200).send(thankYouHtml)
+            res.status(200)
         });
     } else {
         res.status(405).send('Method Not Allowed');
