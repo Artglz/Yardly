@@ -22,7 +22,7 @@ module.exports = async (req, res) => {
         //     text: `Form submission received:\nName: ${name}\nEmail: ${email}\nAddress: ${address}`
         // };
         console.log(name, email, address);
-        res.sendFile(path.join(__dirname, '../public/submitForm.html'));
+        // res.sendFile(path.join(__dirname, '../public/submitForm.html'));
         // // Send email asynchronously
         // transporter.sendMail(mailOptions)
         //     .then(info => {
