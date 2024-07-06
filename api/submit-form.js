@@ -1,62 +1,76 @@
 // Import necessary modules
-import fs from 'fs';
-import path from 'path';
 import { parse } from 'querystring'; // For parsing form data
+
+// Example inline HTML content for the "Thank you" page
+const thankYouHtml = `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You!</title>
+    <style>
+        /* Your CSS styles here */
+        h2 {
+            text-align: center;
+            color: #fff;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #00BF63;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+</head>
+<body>
+    <img src="Yardly.jpg" alt="">
+    <h2>Thank you for submitting the Form!</h2>
+</body>
+</html>
+`;
 
 // Define your serverless function handler
 export default async function handler(req, res) {
-  // Construct the path to your HTML file
-  const filePath = path.join(__dirname, '../public/submitForm.html');
-  
-  // Serve the HTML form page for GET requests
-  if (req.method === 'GET') {
-    try {
-      // Read the HTML file asynchronously
-      fs.readFile(filePath, 'utf8', (err, data) => {
-        if (err) {
-          console.error('Error reading file:', err);
-          return res.status(500).send('Internal Server Error');
+    if (req.method === 'POST') {
+        try {
+            let body = '';
+            
+            // Collect data from the request stream
+            req.on('data', (chunk) => {
+                body += chunk.toString();
+            });
+
+            // Parse the collected data when the request ends
+            req.on('end', () => {
+                const formData = parse(body);
+
+                // Process the form data as needed
+                const { name, email, address } = formData;
+                
+                // Example: Send email or store data in a database
+                // Replace this with your actual processing logic
+                console.log(`Form submission received: Name - ${name}, Email - ${email}, Address - ${address}`);
+
+                // Send the "Thank you" HTML page as the response
+                res.setHeader('Content-Type', 'text/html');
+                res.status(200).send(thankYouHtml);
+            });
+        } catch (error) {
+            console.error('Error handling form submission:', error);
+            return res.status(500).send('Error handling form submission');
         }
-
-        // Send the HTML content as the response
-        res.setHeader('Content-Type', 'text/html');
-        res.send(data);
-      });
-    } catch (error) {
-      console.error('Error handling request:', error);
-      return res.status(500).send('Internal Server Error');
+    } else {
+        // Handle other HTTP methods
+        res.status(405).send('Method Not Allowed');
     }
-  } 
-  // Handle form submissions for POST requests
-  else if (req.method === 'POST') {
-    try {
-      let body = '';
-      
-      // Collect data from the request stream
-      req.on('data', (chunk) => {
-        body += chunk.toString();
-      });
-
-      // Parse the collected data when the request ends
-      req.on('end', () => {
-        const formData = parse(body);
-
-        // Process the form data as needed
-        const { name, email, address } = formData;
-        
-        // Example: Send email or store data in a database
-        // Replace this with your logic
-        console.log(`Form submission received: Name - ${name}, Email - ${email}, Address - ${address}`);
-
-        // Redirect to a "Thank You" page or return a success message
-        res.setHeader('Content-Type', 'text/plain');
-        res.status(200).sendFile(path.join(__dirname, '../public/submitForm.html'));
-      });
-    } catch (error) {
-      console.error('Error handling form submission:', error);
-      return res.status(500).send('Error handling form submission');
-    }
-  } else {
-    return res.status(405).send('Method Not Allowed');
-  }
 }
