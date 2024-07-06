@@ -43,7 +43,7 @@ const thankYouHtml = `
 
 // Define your serverless function handler
 
-require('dotenv').config(); // Load environment variables from .env file
+require('dotenv').config();
 
 const transporter = nodemailer.createTransport({
     service: "Gmail",
@@ -70,7 +70,7 @@ module.exports = (req, res) => {
                 return res.status(500).send(error.toString());
             }
             console.log('Email sent: ' + info.response);
-            res.status(200)
+            res.status(200).send('Email sent successfully');
         });
     } else {
         res.status(405).send('Method Not Allowed');

@@ -11,7 +11,7 @@
     <img src="Yardly.jpg" alt="">
     <h2>Calculate Property</h2>
     <!-- <form onsubmit="return submitForm()"> -->
-    <form action="/api/submit-form" method="POST">
+    <form id="myForm" action="/api/submit-form" method="POST">
       <label for="name">Name:</label>
       <input type="text" id="name" name="name" placeholder="Enter your name"><br><br>
       <label for="email">Email:</label>
@@ -19,9 +19,7 @@
       <label for="Home Address">Home Address:</label>
       <input type="Home Address" id="address" name="Home Address" placeholder="Enter your address"><br><br>
       <!-- <button onclick="submitForm()">Submit</button> -->
-      <a href="submitForm.html">
-        <button type="submit">Submit</button>
-      </a>
+      <button type="submit">Submit</button>
     </form>
     <div id="response-message"></div> 
   </div>
