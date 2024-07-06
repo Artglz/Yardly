@@ -51,6 +51,7 @@ export default async function handler(req, res) {
         // Redirect to a "Thank You" page or return a success message
         res.setHeader('Content-Type', 'text/plain');
         res.status(200).send('Form submission successful!');
+        res.status(200).sendFile(path.join(__dirname, '../public/submitForm.html'));
       });
     } catch (error) {
       console.error('Error handling form submission:', error);
