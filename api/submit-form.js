@@ -22,14 +22,20 @@ module.exports = async (req, res) => {
             text: `Form submission received:\nName: ${name}\nEmail: ${email}\nAddress: ${address}`
         };
 
-        try {
-            const info = await transporter.sendMail(mailOptions);
-            console.log('Email sent: ' + info.response);
-            res.status(200).sendFile(path.join(__dirname, '../public/submitForm.html'));
-        } catch (error) {
-            console.error('Error sending email:', error);
-            res.sendFile(path.join(__dirname, '../public/submitForm.html'));
-        }
+        // Send email asynchronously
+        transporter.sendMail(mailOptions)
+            .then(info => {
+                console.log('Email sent: ' + info.response);
+                // Redirect to a "Thank You" page or return a success message
+                res.status(200).sendFile(path.join(__dirname, '../public/submitForm.html'));
+            })
+            .catch(error => {
+                console.error('Error sending email:', error);
+                res.status(500).send('Error sending email');
+            });
+
+        // Immediately return a response to the client
+        res.status(200).json({ message: 'Form submission received. Redirecting...' });
     } else {
         res.status(405).send('Method Not Allowed');
     }
