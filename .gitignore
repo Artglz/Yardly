@@ -1,1 +1,4 @@
 /zillow.js
+/.env
+/node_modules
+/.vscode
