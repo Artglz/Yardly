@@ -11,11 +11,11 @@ export default async function handler(req, res) {
     req.on('data', (chunk) => {
       body += chunk.toString();
     });
-
+    const filePath = path.join(__dirname, '../public/submitForm.html');
     // Parse the collected data when the request ends
     req.on('end', () => {
       const parsedBody = parse(body);
-      return res.send(`Hello ${parsedBody.name}, you just parsed the request body!`);
+      return res.sendFile(filePath);
     });
   } else {
     return res.status(405).send('Method Not Allowed');
