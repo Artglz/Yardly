@@ -82,8 +82,16 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-document.getElementById('myForm').addEventListener('submit', function(event) {
+document.getElementById("myForm").onsubmit = async function(event) {
     event.preventDefault();
-
-    window.location.href = 'submitForm.html';
-});
+    const formData = new FormData(this);
+    const response = await fetch('/api/submit-form', {
+        method: 'POST',
+        body: formData
+    });
+    if (response.ok) {
+        window.location.href = '/submitForm.html'; // Redirect to success page
+    } else {
+        alert('Failed to submit form');
+    }
+};
