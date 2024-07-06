@@ -29,7 +29,7 @@ export default async function handler(req, res) {
                 return res.status(500).send(error.toString());
             }
             console.log('Email sent: ' + info.response);
-            res.status(200).send(thankYouHtml);
+            res.status(200).json({ message: 'Email sent successfully' });
         });
     } else {
         res.status(405).send('Method Not Allowed');
