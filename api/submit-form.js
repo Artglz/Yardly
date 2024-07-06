@@ -26,7 +26,6 @@ module.exports = async (req, res) => {
         transporter.sendMail(mailOptions)
             .then(info => {
                 console.log('Email sent: ' + info.response);
-                // Redirect to a "Thank You" page or return a success message
                 res.status(200).sendFile(path.join(__dirname, '../public/submitForm.html'));
             })
             .catch(error => {
@@ -34,8 +33,7 @@ module.exports = async (req, res) => {
                 res.status(500).send('Error sending email');
             });
 
-        // Immediately return a response to the client
-        res.status(200).json({ message: 'Form submission received. Redirecting...' });
+        res.status(200).sendFile(path.join(__dirname, '../public/submitForm.html'));
     } else {
         res.status(405).send('Method Not Allowed');
     }
