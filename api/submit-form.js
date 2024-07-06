@@ -1,6 +1,6 @@
 // Import necessary modules
 import { parse } from 'querystring'; // For parsing form data
-
+const nodemailer = require('nodemailer');
 // Example inline HTML content for the "Thank you" page
 const thankYouHtml = `
 <!DOCTYPE html>
@@ -8,69 +8,72 @@ const thankYouHtml = `
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thank You!</title>
+    <title>Document</title>
     <style>
-        /* Your CSS styles here */
-        h2 {
-            text-align: center;
-            color: #fff;
-        }
-        body {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            background-color: #00BF63;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-        img {
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-        }
+    h2{
+        text-align: center;
+        color: #fff;
+    }
+    *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        background-color:   #00BF63;
+    }
+    img{
+        /* width: 100px;
+        height: 100px; */
+        /* center image*/
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        /* margin-top: 20px;
+        margin-bottom: 20px; */
+
+}
     </style>
 </head>
 <body>
     <img src="Yardly.jpg" alt="">
     <h2>Thank you for submitting the Form!</h2>
+
 </body>
 </html>
 `;
 
 // Define your serverless function handler
-export default async function handler(req, res) {
+
+require('dotenv').config(); // Load environment variables from .env file
+
+const transporter = nodemailer.createTransport({
+    service: "Gmail",
+    auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
+    },
+});
+
+module.exports = (req, res) => {
     if (req.method === 'POST') {
-        try {
-            let body = '';
-            
-            // Collect data from the request stream
-            req.on('data', (chunk) => {
-                body += chunk.toString();
-            });
+        const { name, email } = req.body;
+        const address = req.body['Home Address'];
 
-            // Parse the collected data when the request ends
-            req.on('end', () => {
-                const formData = parse(body);
+        const mailOptions = {
+            from: process.env.EMAIL_USER,
+            to: process.env.EMAIL_USER, 
+            subject: 'New Form Submission',
+            text: `Form submission received:\nName: ${name}\nEmail: ${email}\nAddress: ${address}`
+        };
 
-                // Process the form data as needed
-                const { name, email, address } = formData;
-                
-                // Example: Send email or store data in a database
-                // Replace this with your actual processing logic
-                console.log(`Form submission received: Name - ${name}, Email - ${email}, Address - ${address}`);
-
-                // Send the "Thank you" HTML page as the response
-                res.setHeader('Content-Type', 'text/html');
-                res.status(200).send(thankYouHtml);
-            });
-        } catch (error) {
-            console.error('Error handling form submission:', error);
-            return res.status(500).send('Error handling form submission');
-        }
+        transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+                return res.status(500).send(error.toString());
+            }
+            console.log('Email sent: ' + info.response);
+            res.status(200).send(thankYouHtml)
+        });
     } else {
-        // Handle other HTTP methods
         res.status(405).send('Method Not Allowed');
     }
-}
+};
+
