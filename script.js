@@ -50,48 +50,18 @@ function displayData() {
 
 window.onload = displayData;
 
-document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('signup-form').addEventListener('submit', function(event) {
-        event.preventDefault(); // Prevent the default form submission
 
-        // Gather form data
-        const formData = new FormData(event.target);
-        const data = {
-            name: formData.get('name'),
-            email: formData.get('email'),
-            address: formData.get('address')
-        };
 
-        // Send the form data to the server
-        fetch('http://localhost:3000/submit-form', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        })
-        .then(response => response.text())
-        .then(result => {
-            // Display the response message
-            document.getElementById('response-message').innerText = result;
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            document.getElementById('response-message').innerText = 'An error occurred. Please try again.';
-        });
-    });
-});
-
-document.getElementById("myForm").onsubmit = async function(event) {
-    event.preventDefault();
-    const formData = new FormData(this);
-    const response = await fetch('/api/submit-form', {
-        method: 'POST',
-        body: formData
-    });
-    if (response.ok) {
-        window.location.href = 'submitForm.html'; // Redirect to success page
-    } else {
-        alert('Failed to submit form');
-    }
-};
+// document.getElementById("myForm").onsubmit = async function(event) {
+//     event.preventDefault();
+//     const formData = new FormData(this);
+//     const response = await fetch('/api/submit-form', {
+//         method: 'POST',
+//         body: formData
+//     });
+//     if (response.ok) {
+//         window.location.href = 'submitForm.html'; // Redirect to success page
+//     } else {
+//         alert('Failed to submit form');
+//     }
+// };
