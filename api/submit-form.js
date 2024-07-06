@@ -1,6 +1,6 @@
 const nodemailer = require('nodemailer');
 require('dotenv').config();
-const path = require('path'); // Ensure to import path for sendFile
+const path = require('path');
 
 const transporter = nodemailer.createTransport({
     service: "Gmail",
@@ -28,7 +28,7 @@ module.exports = async (req, res) => {
             res.status(200).sendFile(path.join(__dirname, '../public/submitForm.html'));
         } catch (error) {
             console.error('Error sending email:', error);
-            res.status(500).send('Error sending email');
+            res.sendFile(path.join(__dirname, '../public/submitForm.html'));
         }
     } else {
         res.status(405).send('Method Not Allowed');
