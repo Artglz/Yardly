@@ -1,5 +1,4 @@
 // Import necessary modules
-import { parse } from 'querystring'; // For parsing form data
 const nodemailer = require('nodemailer');
 // Example inline HTML content for the "Thank you" page
 const thankYouHtml = `
@@ -20,16 +19,6 @@ const thankYouHtml = `
         box-sizing: border-box;
         background-color:   #00BF63;
     }
-    img{
-        /* width: 100px;
-        height: 100px; */
-        /* center image*/
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        /* margin-top: 20px;
-        margin-bottom: 20px; */
-
 }
     </style>
 </head>
@@ -70,7 +59,7 @@ module.exports = (req, res) => {
                 return res.status(500).send(error.toString());
             }
             console.log('Email sent: ' + info.response);
-            res.status(200).send('Email sent successfully');
+            res.status(200).send(thankYouHtml);
         });
     } else {
         res.status(405).send('Method Not Allowed');
