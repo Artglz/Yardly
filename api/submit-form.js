@@ -10,8 +10,16 @@ const thankYouHtml = `
     <title>Document</title>
     <style>
     h2{
-        text-align: center;
         color: #fff;
+        margin-top: 400px;
+        text-align: center;
+        font-size: 40px;
+    }
+    p{
+        color: #fff;
+        margin-top: 20px;
+        text-align: center;
+        font-size: 20px;
     }
     *{
         margin: 0;
@@ -19,15 +27,26 @@ const thankYouHtml = `
         box-sizing: border-box;
         background-color:   #00BF63;
     }
-}
+    /* img{
+         width: 100px;
+        height: 100px; 
+         center image
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 20px;
+        margin-bottom: 20px; 
+} */
     </style>
 </head>
 <body>
-    <img src="/public/Yardly.jpg" alt="">
+    <!-- <img src="Yardly.jpg" alt=""> -->
     <h2>Thank you for submitting the Form!</h2>
+    <p>We will be reaching out with more information</p>
 
 </body>
 </html>
+
 `;
 
 // Define your serverless function handler
