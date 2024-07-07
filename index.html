@@ -11,17 +11,40 @@
     <img src="Yardly.jpg" alt="">
     <h2>Calculate Property</h2>
     <!-- <form onsubmit="return submitForm()"> -->
-    <form id="myForm">
+    <form id="submitForm">
       <label for="name">Name:</label>
       <input type="text" id="name" name="name" placeholder="Enter your name"><br><br>
       <label for="email">Email:</label>
       <input type="email" id="email" name="email" placeholder="Enter your email"><br><br>
       <label for="Home Address">Home Address:</label>
-      <input type="Home Address" id="address" name="Home Address" placeholder="Enter your address"><br><br>
+      <input type="Home Address" id="address" name="address" placeholder="Enter your address"><br><br>
       <!-- <button onclick="submitForm()">Submit</button> -->
       <button type="submit">Submit</button>
     </form>
-    <div id="response-message"></div> 
+    <div id="response-message"></div>
+    <div id="property-details"></div>
+
+    <script>
+        document.getElementById('submitForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            const formData = new FormData(this);
+            fetch('/api-python/submitForm', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Form submission response:', data);
+                if (data.square_footage) {
+                    document.getElementById('property-details').innerText = `Square footage: ${data.square_footage}`;
+                }
+                // Redirect to thank you page if needed
+                // window.location.href = '/thankYou.html';
+            })
+            .catch(error => console.error('Error submitting form:', error));
+        });
+    </script>
   </div>
 </body>
 </html>
