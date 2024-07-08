@@ -45,26 +45,47 @@
         //     })
         //     .catch(error => console.error('Error submitting form:', error));
         // });
-        document.getElementById('submitForm').addEventListener('submit', function(event) {
-          event.preventDefault(); // Prevent default form submission
+      
+        // document.getElementById('submitForm').addEventListener('submit', function(event) {
+        //   event.preventDefault(); // Prevent default form submission
         
-          const formData = new FormData(this);
-          const name = formData.get('name');
-          const email = formData.get('email');
-          const address = formData.get('address');
+        //   const formData = new FormData(this);
+        //   const name = formData.get('name');
+        //   const email = formData.get('email');
+        //   const address = formData.get('address');
         
-          fetch('/api/submit-form', {
-            method: 'POST',
-            body: JSON.stringify({ name, email, 'Home Address': address }),
-            headers: { 'Content-Type': 'application/json' }
-          })
-          .then(response => response.json())
-          .then(data => {
-            console.log('Form submission response:', data);
-            document.getElementById('property-details').innerText = `Form submitted successfully!`;
-          })
-          .catch(error => console.error('Error submitting form:', error));
-        });
+        //   fetch('/api/submit-form', {
+        //     method: 'POST',
+        //     body: JSON.stringify({ name, email, 'Home Address': address }),
+        //     headers: { 'Content-Type': 'application/json' }
+        //   })
+        //   .then(response => response.json())
+        //   .then(data => {
+        //     console.log('Form submission response:', data);
+        //     document.getElementById('property-details').innerText = `Form submitted successfully!`;
+        //   })
+        //   .catch(error => console.error('Error submitting form:', error));
+        // });
+      document.getElementById('submitForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent default form submission
+      
+        const formData = new FormData(this);
+        const name = formData.get('name');
+        const email = formData.get('email');
+        const address = formData.get('address');
+      
+        fetch('/api-python/submitForm', {
+          method: 'POST',
+          body: JSON.stringify({ address }),
+          headers: { 'Content-Type': 'application/json' }
+        })
+        .then(response => response.json())
+        .then(data => {
+          console.log('Form submission response:', data);
+          document.getElementById('property-details').innerText = `Square footage: ${data.square_footage}`;
+        })
+        .catch(error => console.error('Error submitting form:', error));
+      });
     </script>
   </div>
 </body>
