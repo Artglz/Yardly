@@ -53,7 +53,7 @@ from flask import Flask, jsonify
 
 app = Flask(__name__)
 
-@app.route('/api/data', methods=['GET'])
+@app.route('/api/submitForm', methods=['GET'])
 def get_data():
     data = {'message': 'Hello from Python!'}
     return jsonify(data)
