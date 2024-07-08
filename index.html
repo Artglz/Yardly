@@ -74,7 +74,7 @@
         const email = formData.get('email');
         const address = formData.get('address');
       
-        fetch('/api-python/submitForm', {
+        fetch('/api/submitForm', {
           method: 'POST',
           body: JSON.stringify({ address }),
           headers: { 'Content-Type': 'application/json' }
