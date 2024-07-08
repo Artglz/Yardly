@@ -24,27 +24,27 @@ def submit_form():
     data = request.form
     address = data.get('address')
 
-    zillow_url = get_zillow_url(address)
-    if not zillow_url:
-        return jsonify({'message': 'Zillow URL not found'}), 404
+    # zillow_url = get_zillow_url(address)
+    # if not zillow_url:
+    #     return jsonify({'message': 'Zillow URL not found'}), 404
     
-    zpid = extract_zpid(zillow_url)
-    if not zpid:
-        return jsonify({'message': 'ZPID not found in URL'}), 404
+    # zpid = extract_zpid(zillow_url)
+    # if not zpid:
+    #     return jsonify({'message': 'ZPID not found in URL'}), 404
 
-    url = "https://zillow-com1.p.rapidapi.com/property"
-    querystring = {"zpid": zpid}
+    # url = "https://zillow-com1.p.rapidapi.com/property"
+    # querystring = {"zpid": zpid}
 
-    headers = {
-        "X-RapidAPI-Key": os.getenv('RAPIDAPI_KEY'),
-        "X-RapidAPI-Host": "zillow-com1.p.rapidapi.com"
-    }
+    # headers = {
+    #     "X-RapidAPI-Key": os.getenv('RAPIDAPI_KEY'),
+    #     "X-RapidAPI-Host": "zillow-com1.p.rapidapi.com"
+    # }
 
-    response = requests.request("GET", url, headers=headers, params=querystring)
-    property_details = response.json()
-    square_footage = property_details.get("livingArea", "Square footage not available")
+    # response = requests.request("GET", url, headers=headers, params=querystring)
+    # property_details = response.json()
+    # square_footage = property_details.get("livingArea", "Square footage not available")
 
-    return jsonify({'square_footage': square_footage})
+    return jsonify({'square_footage': address})
 
 if __name__ == '__main__':
     app.run()
