@@ -66,10 +66,13 @@
       //   })
       //   .catch(error => console.error('Error submitting form:', error));
       // });
-      fetch('/api/submitForm')
-        .then(response => response.json())
-        .then(data => console.log(data));
-      
+      document.getElementById('submitForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        
+        fetch('/api/submitForm')
+          .then(response => response.json())
+          .then(data => console.log(data));
+      });
     </script>
   </div>
 </body>
