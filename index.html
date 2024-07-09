@@ -28,13 +28,18 @@
     <div id="property-details"></div>
 
     <py-script>
+        import js
         from pyscript import Element
 
-        # Get the div element
-        response_message_div = Element("response-message")
+        def handle_form_submission(event):
+            event.preventDefault()  # Prevent the form from submitting the traditional way
+            name = js.document.getElementById('name').value
+            email = js.document.getElementById('email').value
+            address = js.document.getElementById('address').value
+            response_message = f"Name: {name}, Email: {email}, Address: {address}"
+            Element('response-message').write(response_message)
 
-        # Set the inner HTML of the div
-        response_message_div.write("Hello, World!")
+        js.document.getElementById('submitForm').addEventListener('submit', handle_form_submission)
     </py-script>
 <!--     <script>
         document.getElementById('submitForm').addEventListener('submit', function(event) {
