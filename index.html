@@ -28,7 +28,13 @@
     <div id="property-details"></div>
 
     <py-script>
-        print("Hello, World!")
+        from pyscript import Element
+
+        # Get the div element
+        response_message_div = Element("response-message")
+
+        # Set the inner HTML of the div
+        response_message_div.write("Hello, World!")
     </py-script>
 <!--     <script>
         document.getElementById('submitForm').addEventListener('submit', function(event) {
