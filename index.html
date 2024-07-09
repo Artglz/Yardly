@@ -43,8 +43,8 @@
           .then(response => response.json())
           .then(data => {
             console.log('Form submission response:', data);
-            // document.getElementById('property-details').innerText = `Form submitted successfully!`;
-            window.location.href = 'submitForm.html';
+            document.getElementById('property-details').innerText = `Form submitted successfully!`;
+            // window.location.href = 'submitForm.html';
           })
           .catch(error => console.error('Error submitting form:', error));
         });
