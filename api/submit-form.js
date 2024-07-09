@@ -37,7 +37,7 @@
 // }
 
 // api/submitForm.js
-import axios from 'axios';
+const axios = require('axios');
 require('dotenv').config();
 
 export default async function handler(req, res) {
