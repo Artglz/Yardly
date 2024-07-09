@@ -5,8 +5,6 @@
   <link rel="stylesheet" href="style.css">
   <!-- <script src="./script.js"></script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCkuKxxkg7BLtZ4IZVGTfSkuLttpC0HW0w&libraries=places"></script> -->
-  <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css">
-  <script defer src="https://pyscript.net/latest/pyscript.js"></script>
 </head>
 <body onload="initAutocomplete()">
   <div class="signup-form">
@@ -27,21 +25,8 @@
     <div id="response-message"></div>
     <div id="property-details"></div>
 
-    <py-script>
-        import js
-        from pyscript import Element
 
-        def handle_form_submission(event):
-            event.preventDefault()  # Prevent the form from submitting the traditional way
-            name = js.document.getElementById('name').value
-            email = js.document.getElementById('email').value
-            address = js.document.getElementById('address').value
-            response_message = f"Name: {name}, Email: {email}, Address: {address}"
-            Element('response-message').write(response_message)
-
-        js.document.getElementById('submitForm').addEventListener('submit', handle_form_submission)
-    </py-script>
-<!--     <script>
+    <script>
         document.getElementById('submitForm').addEventListener('submit', function(event) {
           event.preventDefault(); // Prevent default form submission
         
@@ -63,38 +48,38 @@
           })
           .catch(error => console.error('Error submitting form:', error));
         });
-      document.getElementById('submitForm').addEventListener('submit', function(event) {
-        event.preventDefault(); // Prevent default form submission
+      // document.getElementById('submitForm').addEventListener('submit', function(event) {
+      //   event.preventDefault(); // Prevent default form submission
       
-        const formData = new FormData(this);
-        const name = formData.get('name');
-        const email = formData.get('email');
-        const address = formData.get('address');
+      //   const formData = new FormData(this);
+      //   const name = formData.get('name');
+      //   const email = formData.get('email');
+      //   const address = formData.get('address');
       
-        fetch('/api/submitForm', {
-          method: 'POST',
-          body: JSON.stringify({ address }),
-          headers: { 'Content-Type': 'application/json' }
-        })
-        .then(response => response.json())
-        .then(data => {
-          console.log('Form submission response:', data);
-          document.getElementById('property-details').innerText = `Square footage: ${data.square_footage}`;
-        })
-        .catch(error => console.error('Error submitting form:', error));
-      });
-      document.getElementById('submitForm').addEventListener('submit', function(event) {
-      event.preventDefault(); // Prevent default form submission
+      //   fetch('/api/submitForm', {
+      //     method: 'POST',
+      //     body: JSON.stringify({ address }),
+      //     headers: { 'Content-Type': 'application/json' }
+      //   })
+      //   .then(response => response.json())
+      //   .then(data => {
+      //     console.log('Form submission response:', data);
+      //     document.getElementById('property-details').innerText = `Square footage: ${data.square_footage}`;
+      //   })
+      //   .catch(error => console.error('Error submitting form:', error));
+      // });
+      // document.getElementById('submitForm').addEventListener('submit', function(event) {
+      // event.preventDefault(); // Prevent default form submission
     
-      fetch('/api/submitForm')
-        .then(response => response.json())
-        .then(data => {
-          console.log('Form submission response:', data);
-          document.getElementById('property-details').innerText = data.message;
-        })
-        .catch(error => console.error('Error submitting form:', error));
-      });
-     </script> -->
+      // fetch('/api/submitForm')
+      //   .then(response => response.json())
+      //   .then(data => {
+      //     console.log('Form submission response:', data);
+      //     document.getElementById('property-details').innerText = data.message;
+      //   })
+      //   .catch(error => console.error('Error submitting form:', error));
+      // });
+     </script>
   </div>
 </body>
 </html>
