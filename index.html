@@ -5,6 +5,8 @@
   <link rel="stylesheet" href="style.css">
   <!-- <script src="./script.js"></script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCkuKxxkg7BLtZ4IZVGTfSkuLttpC0HW0w&libraries=places"></script> -->
+  <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css">
+  <script defer src="https://pyscript.net/latest/pyscript.js"></script>
 </head>
 <body onload="initAutocomplete()">
   <div class="signup-form">
@@ -25,7 +27,10 @@
     <div id="response-message"></div>
     <div id="property-details"></div>
 
-    <script>
+    <py-script>
+        print("Hello, World!")
+    </py-script>
+<!--     <script>
         document.getElementById('submitForm').addEventListener('submit', function(event) {
           event.preventDefault(); // Prevent default form submission
         
@@ -47,38 +52,38 @@
           })
           .catch(error => console.error('Error submitting form:', error));
         });
-      // document.getElementById('submitForm').addEventListener('submit', function(event) {
-      //   event.preventDefault(); // Prevent default form submission
+      document.getElementById('submitForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent default form submission
       
-      //   const formData = new FormData(this);
-      //   const name = formData.get('name');
-      //   const email = formData.get('email');
-      //   const address = formData.get('address');
+        const formData = new FormData(this);
+        const name = formData.get('name');
+        const email = formData.get('email');
+        const address = formData.get('address');
       
-      //   fetch('/api/submitForm', {
-      //     method: 'POST',
-      //     body: JSON.stringify({ address }),
-      //     headers: { 'Content-Type': 'application/json' }
-      //   })
-      //   .then(response => response.json())
-      //   .then(data => {
-      //     console.log('Form submission response:', data);
-      //     document.getElementById('property-details').innerText = `Square footage: ${data.square_footage}`;
-      //   })
-      //   .catch(error => console.error('Error submitting form:', error));
-      // });
-    //   document.getElementById('submitForm').addEventListener('submit', function(event) {
-    //   event.preventDefault(); // Prevent default form submission
+        fetch('/api/submitForm', {
+          method: 'POST',
+          body: JSON.stringify({ address }),
+          headers: { 'Content-Type': 'application/json' }
+        })
+        .then(response => response.json())
+        .then(data => {
+          console.log('Form submission response:', data);
+          document.getElementById('property-details').innerText = `Square footage: ${data.square_footage}`;
+        })
+        .catch(error => console.error('Error submitting form:', error));
+      });
+      document.getElementById('submitForm').addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent default form submission
     
-    //   fetch('/api/submitForm')
-    //     .then(response => response.json())
-    //     .then(data => {
-    //       console.log('Form submission response:', data);
-    //       document.getElementById('property-details').innerText = data.message;
-    //     })
-    //     .catch(error => console.error('Error submitting form:', error));
-    //   });
-    // </script>
+      fetch('/api/submitForm')
+        .then(response => response.json())
+        .then(data => {
+          console.log('Form submission response:', data);
+          document.getElementById('property-details').innerText = data.message;
+        })
+        .catch(error => console.error('Error submitting form:', error));
+      });
+     </script> -->
   </div>
 </body>
 </html>
