@@ -46,13 +46,13 @@ export default async function handler(req, res) {
         const address = req.body['Home Address'];
         try {
             // Perform Google Search
-            const searchQuery = `${address} site:zillow.com`;
-            const searchUrl = `https://www.googleapis.com/customsearch/v1?q=${encodeURIComponent(searchQuery)}&key=${process.env.GOOGLE_API_KEY}&cx=${process.env.GOOGLE_CUSTOM_SEARCH_CX}`;
+            // const searchQuery = `${address} site:zillow.com`;
+            // const searchUrl = `https://www.googleapis.com/customsearch/v1?q=${encodeURIComponent(searchQuery)}&key=${process.env.GOOGLE_API_KEY}&cx=${process.env.GOOGLE_CUSTOM_SEARCH_CX}`;
 
-            const response = await axios.get(searchUrl);
-            const firstLink = response.data.items[0].link;
+            // const response = await axios.get(searchUrl);
+            // const firstLink = response.data.items[0].link;
 
-            res.status(200).json({ firstLink });
+            res.status(200).json({ message: address });
         } catch (error) {
             console.error(error);
             res.status(500).send('Error performing Google search');
