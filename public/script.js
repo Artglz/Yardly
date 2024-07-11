@@ -58,7 +58,8 @@ document.addEventListener('DOMContentLoaded', function() {
         const formData = new FormData(event.target);
         const data = {
             name: formData.get('name'),
-            email: formData.get('email'),
+            // email: formData.get('email')
+            phone: formData.get('phone'),
             address: formData.get('address')
         };
 
