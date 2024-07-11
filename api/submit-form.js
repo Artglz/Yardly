@@ -63,14 +63,14 @@ const transporter = nodemailer.createTransport({
 
 module.exports = (req, res) => {
     if (req.method === 'POST') {
-        const { name, email } = req.body;
+        const { name, phone } = req.body;
         const address = req.body['Home Address'];
 
         const mailOptions = {
             from: process.env.EMAIL_USER,
             to: process.env.EMAIL_USER, 
             subject: 'New Form Submission',
-            text: `Form submission received:\nName: ${name}\nEmail: ${email}\nAddress: ${address}`
+            text: `Form submission received:\nName: ${name}\nPhone: ${phone}\nAddress: ${address}`
         };
 
         transporter.sendMail(mailOptions, (error, info) => {
