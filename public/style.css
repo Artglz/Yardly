@@ -17,7 +17,7 @@ body {
     border-radius: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     margin: auto;
-    margin-top: 120px;
+    margin-top: 90px;
     display: block; 
 }
 
@@ -39,7 +39,7 @@ form, .signup-form input[type="text"], input[type="email"], input[type="Home Add
 .signup-form input[type="text"], input[type="email"], input[type="Home Address"] {
     width: 80%;
     height: 40px;
-    margin: 20px 10px;
+    margin: 15px 10px;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 15px;
@@ -49,6 +49,11 @@ form, .signup-form input[type="text"], input[type="email"], input[type="Home Add
     margin-right: auto;
 }
 
+.signup-form input[type="Home Address"]{
+    margin-bottom: 0px;
+}
+
+
 .signup-form button[type="submit"] {
 
     background-color: #2E865F; /* Dark green theme */
@@ -56,6 +61,7 @@ form, .signup-form input[type="text"], input[type="email"], input[type="Home Add
     border: none;
     border-radius: 15px;
     cursor: pointer;
+    margin-top: 0px;
 }
 
 .signup-form button[type="submit"]:hover {
@@ -90,3 +96,32 @@ img{
     margin-bottom: 20px;
 
 }
+
+footer {
+    text-align: center;
+    /* margin-top: 40px; */
+    padding: 10px;
+    background-color: #2E865F; 
+    color: #fff;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    left: 0;
+    right: 0;
+    margin-left: 1px;
+}
+
+footer a {
+    color: #fff; 
+    text-decoration: none;
+     margin: 0 10px;
+    font-weight: 600;
+    background-color: #2E865F; 
+    padding: 5px;
+    padding-right: 25px;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+ 
